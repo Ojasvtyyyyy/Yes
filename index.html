@@ -279,46 +279,46 @@
 
         // Authentication functions
         function signUp() {
-            const email = document.getElementById('emailInput').value;
-            const password = document.getElementById('passwordInput').value;
-            window.firebaseApp.auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    currentUser = userCredential.user;
-                    alert('Signed up successfully!');
-                    loadUserData();
-                })
-                .catch((error) => {
-                    alert('Error signing up: ' + error.message);
-                });
-        }
+    const email = document.getElementById('emailInput').value;
+    const password = document.getElementById('passwordInput').value;
+    createUserWithEmailAndPassword(window.firebaseApp.auth, email, password)
+        .then((userCredential) => {
+            currentUser = userCredential.user;
+            alert('Signed up successfully!');
+            loadUserData();
+        })
+        .catch((error) => {
+            alert('Error signing up: ' + error.message);
+        });
+}
 
         function signIn() {
-            const email = document.getElementById('emailInput').value;
-            const password = document.getElementById('passwordInput').value;
-            window.firebaseApp.auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    currentUser = userCredential.user;
-                    alert('Signed in successfully!');
-                    loadUserData();
-                })
-                .catch((error) => {
-                    alert('Error signing in: ' + error.message);
-                });
-        }
+    const email = document.getElementById('emailInput').value;
+    const password = document.getElementById('passwordInput').value;
+    signInWithEmailAndPassword(window.firebaseApp.auth, email, password)
+        .then((userCredential) => {
+            currentUser = userCredential.user;
+            alert('Signed in successfully!');
+            loadUserData();
+        })
+        .catch((error) => {
+            alert('Error signing in: ' + error.message);
+        });
+}
 
         function signOut() {
-            window.firebaseApp.auth.signOut()
-                .then(() => {
-                    currentUser = null;
-                    dailyStats = {};
-                    updateStats();
-                    updateChart();
-                    alert('Signed out successfully!');
-                })
-                .catch((error) => {
-                    alert('Error signing out: ' + error.message);
-                });
-        }
+    signOut(window.firebaseApp.auth)
+        .then(() => {
+            currentUser = null;
+            dailyStats = {};
+            updateStats();
+            updateChart();
+            alert('Signed out successfully!');
+        })
+        .catch((error) => {
+            alert('Error signing out: ' + error.message);
+        });
+}
 
         function loadUserData() {
             if (currentUser) {
